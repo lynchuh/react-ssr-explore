@@ -5,7 +5,7 @@ module.exports={
   entry:{
     app: path.join(__dirname,'../client/server-entry.js')
   },
-  output: {
+  output : {
     filename: "server-entry.js",
     path: path.join(__dirname,'../dist'),
     publicPath: "/public/",  // 静态资源引用时的路径 如果是cdn部署静态资源的话，直接写成cdn的路径即可。
@@ -13,6 +13,14 @@ module.exports={
   },
   module: {
     rules: [
+      {
+        enforce: "pre",
+        test: /.(jsx|js)$/,
+        loader: "eslint-loader",
+        exclude: [
+          path.join(__dirname,'../node_modules')
+        ]
+      },
       {
         test: /.jsx$/,
         loader: 'babel-loader',
