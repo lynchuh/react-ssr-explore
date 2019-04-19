@@ -11,7 +11,7 @@ const config ={
   output: {
     filename: "[name].[hash].js",
     path: path.join(__dirname,'../dist'),
-    publicPath: "/public"  // 静态资源引用时的路径 如果是cdn部署静态资源的话，直接写成cdn的路径即可。
+    publicPath: "/public/"  // 静态资源引用时的路径 如果是cdn部署静态资源的话，直接写成cdn的路径即可。
   },
   module: {
     rules: [
@@ -50,7 +50,7 @@ if(isDev){
     overlay:{
       error: true
     },
-    publicPath:'/public', // 访问所有路径前缀都要加上/public
+    publicPath:'/public/', // 访问所有路径前缀都要加上/public
     historyApiFallback:{ // 当访问index的时候，访问的路径改为/public/index.html
       index: '/public/index.html'
     },
