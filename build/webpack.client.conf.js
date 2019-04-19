@@ -1,8 +1,10 @@
 const webpack = require('webpack')
+const Merge = require('webpack-merge')
 const path = require('path');
 const htmlPlugin = require('html-webpack-plugin');
+const baseConfig = require('./webpack.base.conf')
 
-const isDev = process.env.NODE_ENV = 'development'
+const isDev = process.env.NODE_ENV === 'development'
 
 const config ={
   entry:{
@@ -10,31 +12,6 @@ const config ={
   },
   output: {
     filename: "[name].[hash].js",
-    path: path.join(__dirname,'../dist'),
-    publicPath: "/public/"  // 静态资源引用时的路径 如果是cdn部署静态资源的话，直接写成cdn的路径即可。
-  },
-  module: {
-    rules: [
-      {
-        enforce: "pre",
-        test: /.(jsx|js)$/,
-        loader: "eslint-loader",
-        exclude: [
-          path.join(__dirname,'../node_modules')
-        ]
-      },
-      {
-        test: /.jsx$/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /.js$/,
-        loader: 'babel-loader',
-        exclude: [
-          path.join(__dirname,'../node_modules')
-        ]
-      }
-    ]
   },
   plugins: [
     new htmlPlugin({
@@ -66,4 +43,4 @@ if(isDev){
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
-module.exports = config
+module.exports = Merge(baseConfig,config)

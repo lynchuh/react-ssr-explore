@@ -32,7 +32,7 @@ serverCompiler.watch({},(error,status)=>{ // stats 是webpack打包时输出的�
   status = status.toJson()
   status.errors.forEach(err=>console.error(err))
   status.warnings.forEach(warn=>console.warn(warn))
-  console.log('work in dev server')
+  console.log('update in dev server')
   const bundlePath = path.join(
     serverConfig.output.path,
     serverConfig.output.filename
