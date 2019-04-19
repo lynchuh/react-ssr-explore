@@ -12,7 +12,7 @@ app.use('/public',express.static(path.join(__dirname,'../dist')))
 
 app.get('*',(req,res)=>{
   const appString = ReactSSR.renderToString(serverEntry)
-res.send(template.replace('<div id="root"></div>',`<div id="root">${appString}</div>`))
+res.send(template.replace('<!--app-->',appString))
 })
 
 app.listen(3333,()=>{

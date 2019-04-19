@@ -3,7 +3,7 @@ import React from 'react'
 export default class App extends React.Component{
   render(){
     return (
-      <div>123</div>
+      <div>this is app 456</div>
     )
   }
 }
