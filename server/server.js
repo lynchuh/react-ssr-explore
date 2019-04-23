@@ -7,23 +7,22 @@ const favicon = require('serve-favicon')
 const isDev = process.env.NODE_ENV === 'development'
 console.log(isDev)
 const app = express()
-app.use(favicon(path.join(__dirname,'./favicon.ico')))
+app.use(favicon(path.join(__dirname, './favicon.ico')))
 
-if(!isDev){ // 生产环境
+if (!isDev) { // 生产环境
   const serverEntry = require('../dist/server-entry').default
   const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8')
 
-  app.use('/public',express.static(path.join(__dirname,'../dist')))
-  app.get('*',(req,res)=>{
+  app.use('/public', express.static(path.join(__dirname, '../dist')))
+  app.get('*', (req, res) => {
     const appString = ReactSSR.renderToString(serverEntry)
-    res.send(template.replace('<!--app-->',appString))
+    res.send(template.replace('<!--app-->', appString))
   })
-
-}else{
+} else {
   const devStatic = require('./utils/dev.static')
   devStatic(app)
 }
 
-app.listen(3333,()=>{
+app.listen(3333, () => {
   console.log(('server is listening on port 3333'))
 })
